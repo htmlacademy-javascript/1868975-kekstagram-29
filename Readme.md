@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Алексей Лычагин](https://up.htmlacademy.ru/javascript/29/user/1868975).
-* Наставник: [Евгений Лепёшкин] (https://htmlacademy.ru/profile/spearance)
+* Наставник: [Евгений Лепёшкин](https://htmlacademy.ru/profile/spearance).
 
 ---
 
