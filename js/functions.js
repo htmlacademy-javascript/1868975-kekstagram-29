@@ -15,6 +15,10 @@ const checkPalindrome = function (str) {
 
 const createNumber = function(str) {
   const string = str.toString();
-  const number = string.match(/\d+/g).toString().replaceAll(',', '');
-  return parseInt(number, 10);
+  const number = string.match(/\d+/g);
+  if (number === null) {
+    return NaN;
+  } else {
+    return Number(number.toString().replaceAll(',', ''));
+  }
 };
