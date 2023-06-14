@@ -1,6 +1,7 @@
 const checkLength = function (str, maxLength) {
   return str.length <= maxLength;
 };
+checkLength('проверяемая строка', 20);
 
 
 const checkPalindrome = function (str) {
@@ -11,7 +12,7 @@ const checkPalindrome = function (str) {
   }
   return newStr === str;
 };
-
+checkPalindrome('Лёша на полке клопа нашёл ');
 
 const createNumber = function(str) {
   const string = str.toString();
@@ -22,3 +23,4 @@ const createNumber = function(str) {
     return Number(number.toString().replaceAll(',', ''));
   }
 };
+createNumber('1 кефир, 0.5 батона');
