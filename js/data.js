@@ -1,4 +1,4 @@
-import {getRandomInteger, getRandomArrayElement} from './utils.js';
+import { getRandomInteger, getRandomArrayElement } from './utils.js';
 
 const DESCRIPTIONS = [
   'Удачный кадр',
@@ -71,4 +71,4 @@ const createPosts = () => {
   return posts;
 };
 
-export {createPosts};
+export { createPosts };

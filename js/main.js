@@ -1,4 +1,4 @@
-import './utils.js';
-import {createPosts} from './data.js';
+import { createPosts } from './data.js';
+import { renderThumbnails } from './thumbnails.js';
 
-createPosts();
+renderThumbnails(createPosts());
