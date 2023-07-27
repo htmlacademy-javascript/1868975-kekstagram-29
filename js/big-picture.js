@@ -10,7 +10,7 @@ const socialCommentsCount = bigPicture.querySelector('.social__comment-count');
 
 let commentsCount = COMMENTS_PORTION;
 let currentComments = [];
-
+//Открывается и закрывается (часть 2)
 const renderComments = () => {
   commentList.innerHTML = '';
   commentsCount = (commentsCount > currentComments.length) ? currentComments.length : commentsCount;
