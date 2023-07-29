@@ -1,3 +1,5 @@
+import { isEscapeKey } from './utils.js';
+
 const COMMENTS_PORTION = 5;
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureDetails = bigPicture.querySelector('.social__header');
@@ -10,7 +12,7 @@ const socialCommentsCount = bigPicture.querySelector('.social__comment-count');
 
 let commentsCount = COMMENTS_PORTION;
 let currentComments = [];
-//Открывается и закрывается (часть 2)
+
 const renderComments = () => {
   commentList.innerHTML = '';
   commentsCount = (commentsCount > currentComments.length) ? currentComments.length : commentsCount;
@@ -51,7 +53,7 @@ const closeBigPicture = () => {
 };
 
 function onDocumentKeydown(evt) {
-  if (evt.key === 'Escape') {
+  if (isEscapeKey) {
     evt.preventDefault();
     closeBigPicture();
   }
