@@ -1,6 +1,8 @@
 import { isEscapeKey, normalizeString } from './utils.js';
 import { resetScale } from './scale.js';
 import { resetEffect } from './effects.js';
+import { uploadData } from './fetch.js';
+import { showSuccessMessage, showErrorMessage } from './messages.js';
 
 const errorMessage = {
   INVALID_SYMBOLS: 'строка после решётки должна состоять из букв и чисел',
@@ -20,6 +22,7 @@ const form = document.querySelector('#upload-select-image');
 const hashtagInput = overlay.querySelector('.text__hashtags');
 const submitButton = overlay.querySelector('.img-upload__submit');
 const textDescription = overlay.querySelector('.text__description');
+const imgUploadForm = document.querySelector('.img-upload__form');
 
 let errorAlert = '';
 const error = () => errorAlert;
@@ -106,30 +109,36 @@ function onFormCloseButtonClick() {
   closeForm();
 }
 
-formCloseButton.addEventListener('click', onFormCloseButtonClick);
-
 const onUploadFileChange = () => {
   overlay.classList.remove('hidden');
   body.classList.add('modal-open');
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-const onHashtagInput = () => {
-  if (pristine.validate()) {
-    submitButton.disabled = false;
-  } else {
-    submitButton.disabled = true;
-  }
-};
-
-const onTextDescriptionInput = () => {
-  if (textDescription.value.length > 140) {
+const onTextInput = () => {
+  if (textDescription.value.length > 140 || !pristine.validate()) {
     submitButton.disabled = true;
   } else {
     submitButton.disabled = false;
   }
 };
 
+const onSuccess = () => {
+  closeForm();
+  showSuccessMessage();
+};
+
+const onFail = () => {
+  showErrorMessage();
+};
+
+const onFormUploadSubmit = (evt) => {
+  evt.preventDefault();
+  uploadData(onSuccess, onFail,'POST', new FormData(evt.target));
+};
+
+formCloseButton.addEventListener('click', onFormCloseButtonClick);
+imgUploadForm.addEventListener('submit', onFormUploadSubmit);
 uploadFile.addEventListener('change', onUploadFileChange);
-hashtagInput.addEventListener('input', onHashtagInput);
-textDescription.addEventListener('input', onTextDescriptionInput);
+hashtagInput.addEventListener('input', onTextInput);
+textDescription.addEventListener('input', onTextInput);
