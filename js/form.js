@@ -1,4 +1,6 @@
 import { isEscapeKey, normalizeString } from './utils.js';
+import { resetScale } from './scale.js';
+import { resetEffect } from './effects.js';
 
 const errorMessage = {
   INVALID_SYMBOLS: 'строка после решётки должна состоять из букв и чисел',
@@ -17,6 +19,7 @@ const formCloseButton = overlay.querySelector('.img-upload__cancel');
 const form = document.querySelector('#upload-select-image');
 const hashtagInput = overlay.querySelector('.text__hashtags');
 const submitButton = overlay.querySelector('.img-upload__submit');
+const textDescription = overlay.querySelector('.text__description');
 
 let errorAlert = '';
 const error = () => errorAlert;
@@ -85,10 +88,11 @@ pristine.addValidator(hashtagInput, hashtagValidator, error, 2, false);
 
 const closeForm = () => {
   form.reset();
+  resetScale();
+  resetEffect();
   pristine.reset();
   overlay.classList.add('hidden');
   body.classList.remove('modal-open');
-  formCloseButton.removeEventListener('click', onFormCloseButtonClick);
 };
 
 const onDocumentKeydown = (evt) => {
@@ -118,5 +122,14 @@ const onHashtagInput = () => {
   }
 };
 
+const onTextDescriptionInput = () => {
+  if (textDescription.value.length > 140) {
+    submitButton.disabled = true;
+  } else {
+    submitButton.disabled = false;
+  }
+};
+
 uploadFile.addEventListener('change', onUploadFileChange);
 hashtagInput.addEventListener('input', onHashtagInput);
+textDescription.addEventListener('input', onTextDescriptionInput);
