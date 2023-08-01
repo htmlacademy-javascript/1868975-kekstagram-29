@@ -1,12 +1,14 @@
 import { renderThumbnails } from './thumbnails.js';
 import './form.js';
 import { loadData } from './fetch.js';
+import './filters.js';
 
 let photos = [];
 
 const onSuccess = (data) => {
   photos = data.slice();
   renderThumbnails(photos);
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
 };
 
 const onFail = () => {
@@ -24,3 +26,5 @@ const onFail = () => {
 };
 
 loadData (onSuccess, onFail);
+
+export { photos };

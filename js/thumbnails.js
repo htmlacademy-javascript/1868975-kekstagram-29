@@ -31,4 +31,10 @@ const renderThumbnails = (pictures) => {
   container.appendChild(fragment);
 };
 
-export { renderThumbnails };
+const removeThumbnails = () => {
+  container.querySelectorAll('.picture').forEach((thumbnail) => {
+    thumbnail.remove();
+  });
+};
+
+export { renderThumbnails, removeThumbnails };
