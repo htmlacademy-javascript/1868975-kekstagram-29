@@ -10,13 +10,13 @@ const shuffleArray = (array) => {
   return array;
 };
 
-function debounce (callback, timeoutDelay = 500) {
+const debounce = (callback, timeoutDelay = 500) => {
   let timeoutId;
 
   return (...rest) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
   };
-}
+};
 
 export { isEscapeKey, normalizeString, debounce, shuffleArray };

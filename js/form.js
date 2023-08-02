@@ -4,7 +4,7 @@ import { resetEffect } from './effects.js';
 import { uploadData } from './fetch.js';
 import { showSuccessMessage, showErrorMessage } from './messages.js';
 
-const errorMessage = {
+const ErrorMessage = {
   INVALID_SYMBOLS: 'строка после решётки должна состоять из букв и чисел',
   INVALID_HASHTAG_AMOUNT: 'нельзя указать больше пяти хэш-тегов',
   HASHTAG_REPEAT: 'один и тот же хэш-тег не может быть использован дважды',
@@ -14,6 +14,7 @@ const errorMessage = {
 };
 const MAX_LENGTH = 20;
 const MAX_HASHTAG_AMOUNT = 5;
+const COMMENT_MAX_LENGTH = 140;
 const body = document.querySelector('body');
 const uploadFile = document.querySelector('#upload-file');
 const overlay = body.querySelector('.img-upload__overlay');
@@ -45,27 +46,27 @@ const hashtagValidator = (inputValue) => {
   const rules = [
     {
       check: inputArray.some((hashtag) => hashtag.indexOf('#', 1) >= 1),
-      error: errorMessage.INVALID_SEPARATOR,
+      error: ErrorMessage.INVALID_SEPARATOR,
     },
     {
       check: inputArray.some((hashtag) => hashtag[0] !== '#'),
-      error: errorMessage.INVALID_FIRST_SYMBOL,
+      error: ErrorMessage.INVALID_FIRST_SYMBOL,
     },
     {
       check: inputArray.some((hashtag, _, array) => array.indexOf(hashtag) !== array.lastIndexOf(hashtag)),
-      error: errorMessage.HASHTAG_REPEAT,
+      error: ErrorMessage.HASHTAG_REPEAT,
     },
     {
       check: inputArray.some((hashtag) => hashtag.length > MAX_LENGTH),
-      error: errorMessage.HASHTAG_LENGTH,
+      error: ErrorMessage.HASHTAG_LENGTH,
     },
     {
       check: inputArray.length > MAX_HASHTAG_AMOUNT,
-      error: errorMessage.INVALID_HASHTAG_AMOUNT,
+      error: ErrorMessage.INVALID_HASHTAG_AMOUNT,
     },
     {
       check: inputArray.some((hashtag) => !/^#[a-zа-яё0-9]{1,19}$/i.test(hashtag)),
-      error: errorMessage.INVALID_SYMBOLS,
+      error: ErrorMessage.INVALID_SYMBOLS,
     },
   ];
 
@@ -116,7 +117,7 @@ const onUploadFileChange = () => {
 };
 
 const onTextInput = () => {
-  if (textDescription.value.length > 140 || !pristine.validate()) {
+  if (textDescription.value.length > COMMENT_MAX_LENGTH || !pristine.validate()) {
     submitButton.disabled = true;
   } else {
     submitButton.disabled = false;
