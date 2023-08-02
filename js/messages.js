@@ -5,8 +5,8 @@ const errorMessageTemplate = document.querySelector('#error').content.querySelec
 const successMessageTemplate = document.querySelector('#success').content.querySelector('.success');
 
 const closeMessage = () => {
-  const messageElement = document.querySelector('.success') || document.querySelector('.error');
-  messageElement.remove();
+  const message = document.querySelector('.success') || document.querySelector('.error');
+  message.remove();
   document.removeEventListener('keydown', onDocumentKeydown);
   body.removeEventListener('click', onBodyClick);
 };
@@ -26,11 +26,15 @@ function onDocumentKeydown(evt) {
   evt.stopPropagation();
 }
 
-const showMessage = (messageElement, closeButtonClass) => {
-  body.appendChild(messageElement);
+const onButtonClick = () => {
+  closeMessage();
+};
+
+const showMessage = (message, closeButtonClass) => {
+  body.appendChild(message);
   document.addEventListener('keydown', onDocumentKeydown, true);
   body.addEventListener('click', onBodyClick);
-  messageElement.querySelector(closeButtonClass).addEventListener('click', closeMessage);
+  message.querySelector(closeButtonClass).addEventListener('click', onButtonClick);
 };
 
 const showSuccessMessage = () => {
