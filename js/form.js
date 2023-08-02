@@ -126,15 +126,18 @@ const onTextInput = () => {
 const onSuccess = () => {
   closeForm();
   showSuccessMessage();
+  submitButton.disabled = false;
 };
 
 const onFail = () => {
   showErrorMessage();
+  submitButton.disabled = false;
 };
 
 const onFormUploadSubmit = (evt) => {
   evt.preventDefault();
   uploadData(onSuccess, onFail,'POST', new FormData(evt.target));
+  submitButton.disabled = true;
 };
 
 formCloseButton.addEventListener('click', onFormCloseButtonClick);

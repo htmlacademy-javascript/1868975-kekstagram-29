@@ -24,7 +24,7 @@ const renderComments = () => {
     commentsLoader.classList.remove('hidden');
   }
 
-  socialCommentsCount.textContent = `${commentsCount} из ${currentComments.length} комментариев`;
+  socialCommentsCount.innerHTML = `${commentsCount} из <span class="comments-count">${currentComments.length}</span> комментариев`;
 
   const fragment = document.createDocumentFragment();
   commentsShown.forEach((commentData) => {
