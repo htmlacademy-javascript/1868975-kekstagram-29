@@ -2,6 +2,7 @@ import { renderThumbnails } from './thumbnails.js';
 import './form.js';
 import { loadData } from './fetch.js';
 import './filters.js';
+import './user-photos.js';
 
 let photos = [];
 

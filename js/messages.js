@@ -23,11 +23,12 @@ function onDocumentKeydown(evt) {
     evt.preventDefault();
     closeMessage();
   }
+  evt.stopPropagation();
 }
 
 const showMessage = (messageElement, closeButtonClass) => {
   body.appendChild(messageElement);
-  document.addEventListener('keydown', onDocumentKeydown);
+  document.addEventListener('keydown', onDocumentKeydown, true);
   body.addEventListener('click', onBodyClick);
   messageElement.querySelector(closeButtonClass).addEventListener('click', closeMessage);
 };
