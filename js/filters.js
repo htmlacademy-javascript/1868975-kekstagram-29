@@ -33,7 +33,5 @@ const onFilterButtonClick = (evt) => {
   }
 };
 
-
 thumbnailsFiltersForm.addEventListener('click', onThumbnailsFiltersFormClick);
 thumbnailsFiltersForm.addEventListener('click', onFilterButtonClick);
-
